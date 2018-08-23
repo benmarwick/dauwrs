@@ -31,7 +31,7 @@ Please cite this compendium as:
 
 ### How to download or install
 
-You can download the compendium as a zip from from this URL: [../archive/master.zip](../archive/master.zip)
+You can download the compendium as a zip from from this URL: [../archive/master.zip](../../archive/master.zip)
 
 
 ### Licenses
