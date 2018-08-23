@@ -5,20 +5,23 @@
 
 This repository contains the data and code for our paper:
 
-> Authors, (YYYY). *Title of paper*. Name of journal/book
-> <https://doi.org/xxx/xxx>
+> Hayes, Elspeth, Richard Fullagar, Ben Marwick (2018). *Database of
+> Australian Usewear/Residue Studies, Artefact Design and Multi-purpose
+> Tools*. <https://doi.org/x10.17605/OSF.IO/MYBG2>
 
 Our pre-print is online here:
 
-> Authors, (YYYY). *Title of paper*. Name of journal/book, Accessed 21
-> Aug 2018. Online at <https://doi.org/xxx/xxx>
+> Authors, (2018). *Title of paper*. Name of journal/book, Accessed 22
+> Aug 2018. Online at <https://doi.org/10.13140/RG.2.2.24109.95204>
 
 ### How to cite
 
 Please cite this compendium as:
 
-> Authors, (2018). *Compendium of R code and data for ‘Title of paper’*.
-> Accessed 21 Aug 2018. Online at <https://doi.org/xxx/xxx>
+> Hayes, Elspeth, Richard Fullagar, Ben Marwick, (2018). *Compendium of
+> R code and data for ‘*Database of Australian Usewear/Residue Studies,
+> Artefact Design and Multi-purpose Tools*’*. Accessed 22 Aug 2018.
+> Online at <https://doi.org/10.17605/OSF.IO/MYBG2>
 
 ### How to download or install
 
