@@ -26,10 +26,9 @@ Please cite this compendium as:
 ### How to download or install
 
 You can download the compendium as a zip from from this URL:
-</archive/master.zip>
+[/archive/master.zip](archive/master.zip)
 
-Or you can install this compendium as an R package, dauwrs, from GitHub
-with: \#\#\# Licenses
+### Licenses
 
 **Text and figures :**
 [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
