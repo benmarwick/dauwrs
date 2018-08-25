@@ -253,7 +253,7 @@ docx_doc_text_split <-
 docx_doc_text_split <- docx_doc_text_split[-1]
 
 # how many items in each section?
-map_int(docx_doc_text_split, length) # 170, 49, 71
+map_int(docx_doc_text_split, length) # 170, 50, 71
 
 # Extract year of publication -------------------
 # get dates of publication for each 
@@ -279,7 +279,7 @@ get_dates(test)
 years <- map(docx_doc_text_split, ~get_dates(.x))
 
 # how many years did we get?
-map_int(years, length) %>% discard(. == 0) # 169  47  71
+map_int(years, length) %>% discard(. == 0) # 169  49  72
 
 # plot --------------------------------------------------------------------
 
@@ -290,6 +290,28 @@ years_df_summary <-
   years_df %>% 
   group_by( name, value) %>% 
   tally()
+
+# manual corrections
+
+# publications
+
+# 2010: 4
+# 2017: 7
+
+# reports
+# 1994: 2
+# 2010: 3
+
+years_df_summary <- 
+  years_df_summary %>% 
+  mutate(n = case_when(
+    name == "Publications" & value == 2010 ~ 4,
+    name == "Publications" & value == 2017 ~ 7,
+    name == "Unpublished reports" & value == 1994 ~ 2,
+    name == "Unpublished reports" & value == 2010 ~ 3,
+    TRUE ~ as.numeric(n)
+    ))
+
 
 # pretty facet titles
 library(glue)
