@@ -94,6 +94,23 @@ Now we have a shapefile with the regions as polygons, we can move to the next st
 
 ```{r make-the-map}
 
+# trying QGIS, get cities from http://www.naturalearthdata.com/downloads/10m-cultural-vectors/
+
+# filter it so we only have cities we care about
+
+library(sf)
+cities <- st_read("../figures/ne_10m_populated_places_simple/ne_10m_populated_places_simple.shp")
+
+cities_map <- 
+cities %>% 
+  filter(adm0name %in% c("Australia", "Papua New Guinea", "Indonesia")) %>% 
+  filter(ifelse(adm0name == "Indonesia", pop_max > 2000000, TRUE)) %>% 
+    filter(ifelse(adm0name == "Australia", pop_max > 1000000, TRUE))  %>% 
+    filter(ifelse(adm0name == "Papua New Guinea", pop_max > 100000, TRUE))
+
+st_write(cities_map, "../figures/cities_map.shp")
+
+
 # read in data ---
 site_coords <- readxl::read_excel("../data/raw_data/Fullagar-Hayes-Marwick-grinding-site-locations.xlsx")
 region_label_coords <- readxl::read_excel("../data/raw_data/Fullagar-Hayes-Marwick-grinding-site-locations.xlsx", sheet = 2)
@@ -253,7 +270,7 @@ docx_doc_text_split <-
 docx_doc_text_split <- docx_doc_text_split[-1]
 
 # how many items in each section?
-map_int(docx_doc_text_split, length) # 170, 50, 71
+map_int(docx_doc_text_split, length) # 170, 51, 71
 
 # Extract year of publication -------------------
 # get dates of publication for each 
@@ -279,7 +296,10 @@ get_dates(test)
 years <- map(docx_doc_text_split, ~get_dates(.x))
 
 # how many years did we get?
-map_int(years, length) %>% discard(. == 0) # 169  49  72
+map_int(years, length) %>% discard(. == 0) 
+# 169  49  72
+# 171  49  72 on 30 Sept 2018
+# 172  50  72 on 10 Oct 2018
 
 # plot --------------------------------------------------------------------
 
@@ -291,11 +311,15 @@ years_df_summary <-
   group_by( name, value) %>% 
   tally()
 
+years_df_summary %>% 
+  group_by(name) %>% 
+  tally()
+
 # manual corrections
 
 # publications
 
-# 2010: 4
+# 2010: 5  total for 2010 should be five
 # 2017: 7
 
 # reports
@@ -305,12 +329,17 @@ years_df_summary <-
 years_df_summary <- 
   years_df_summary %>% 
   mutate(n = case_when(
-    name == "Publications" & value == 2010 ~ 4,
+    name == "Publications" & value == 2010 ~ 5,
     name == "Publications" & value == 2017 ~ 7,
     name == "Unpublished reports" & value == 1994 ~ 2,
     name == "Unpublished reports" & value == 2010 ~ 3,
     TRUE ~ as.numeric(n)
-    ))
+    )) %>% 
+  ungroup()
+
+years_df_summary %>% 
+  group_by(name) %>% 
+  tally()
 
 
 # pretty facet titles
